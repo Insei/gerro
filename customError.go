@@ -25,6 +25,40 @@ const (
 	Forbidden
 )
 
+var errorStrings = map[ErrorType]string{
+	NoType:       "NoType",
+	Internal:     "Internal",
+	Validation:   "Validation",
+	NotFound:     "NotFound",
+	AlreadyExist: "AlreadyExist",
+	Unauthorized: "Unauthorized",
+	Forbidden:    "Forbidden",
+}
+
+var errorDescriptions = map[ErrorType]string{
+	NoType:       "unrecognized error occurred",
+	Internal:     "internal error occurred",
+	Validation:   ValidationErrorMessage,
+	NotFound:     "not found error occurred",
+	AlreadyExist: "already exist error occurred",
+	Unauthorized: "unauthorized error occurred",
+	Forbidden:    "forbidden error occurred",
+}
+
+func (t ErrorType) String() string {
+	if name, ok := errorStrings[t]; ok {
+		return name
+	}
+	return fmt.Sprintf("%d", t)
+}
+
+func (t ErrorType) Description() string {
+	if description, ok := errorDescriptions[t]; ok {
+		return description
+	}
+	return t.String()
+}
+
 type customError struct {
 	file      string
 	line      int

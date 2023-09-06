@@ -19,6 +19,10 @@ const (
 	NotFound
 	// AlreadyExist error type
 	AlreadyExist
+	// Unauthorized error type
+	Unauthorized
+	// Forbidden error type
+	Forbidden
 )
 
 type customError struct {
